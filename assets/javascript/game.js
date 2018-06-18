@@ -5,7 +5,7 @@ $(document).ready(function(){
     var playerLosses = 0;
     var win = false;
     var lose = false;
-    const winCondition = Math.floor((Math.random() * 119)+20);
+    var winCondition = generateWinCondition();
     console.log(`The win condition is ${winCondition}`);
 
     //Create Variables that will store random variables for Jewels
@@ -13,6 +13,14 @@ $(document).ready(function(){
     const jewel2 = Math.floor((Math.random() * 13)+1);
     const jewel3 = Math.floor((Math.random() * 13)+1);
     const jewel4 = Math.floor((Math.random() * 13)+1);
+    
+    function generateWinCondition() {
+        var winCondition = Math.floor((Math.random() * 119)+20);
+        return winCondition
+    }
+    
+    
+    
     //Check if the variables generated
     console.log(`Jewel 1 value is ${jewel1}`);
     console.log(`Jewel 2 value is ${jewel2}`);
@@ -28,18 +36,21 @@ $(document).ready(function(){
     $("#score_html").text(playerScore);
     $("#wins_html").text(playerWins);
     $("#losses_html").text(playerLosses);
+    $("#numbertowin").text(winCondition);
 
     if(playerScore===winCondition){
         alert('You win');
         win = true;
         playerWins++;
         NewGame();
+        generateWinCondition()
     }
     if(playerScore>winCondition){
         alert('You lose');
         lose = true;
         playerLosses++;
         NewGame();
+        generateWinCondition()
         }
     
     };
@@ -65,6 +76,9 @@ $(document).ready(function(){
     updateScore ();
     });
 
+    $(".btn").click(function(){
+        location.reload();
+    });
 
 
 
